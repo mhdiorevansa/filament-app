@@ -20,10 +20,10 @@ class BarangResource extends Resource
     protected static ?string $model = Barang::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Manage Data';
     protected static ?string $navigationLabel = 'Items';
     protected static ?string $slug = 'items';
-
-    public static ?string $label = 'Item';
+    protected static ?string $label = 'Items';
 
     public static function form(Form $form): Form
     {
@@ -81,8 +81,8 @@ class BarangResource extends Resource
     {
         return [
             'index' => Pages\ListBarangs::route('/'),
-            'create' => Pages\CreateBarang::route('/create'),
-            'edit' => Pages\EditBarang::route('/{record}/edit'),
+            // 'create' => Pages\CreateBarang::route('/create'),
+            // 'edit' => Pages\EditBarang::route('/{record}/edit'),
         ];
     }
 }

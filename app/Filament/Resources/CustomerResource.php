@@ -6,9 +6,11 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -18,29 +20,29 @@ class CustomerResource extends Resource
     protected static ?string $model = Customer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
-    protected static ?string $navigationGroup = 'Manage Customers';
+    protected static ?string $navigationGroup = 'Manage Data';
     protected static ?string $navigationLabel = 'Customers';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_customer')
+                TextInput::make('nama_customer')
                     ->label('Nama Customer')
                     ->placeholder("Masukan Nama Customer")
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('kode_customer')
+            TextInput::make('kode_customer')
                     ->label('Kode Customer')
                     ->placeholder("Masukan Kode Customer")
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('alamat_customer')
+            TextInput::make('alamat_customer')
                     ->label('Alamat Customer')
                     ->placeholder("Masukan Alamat Customer")
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('telepon_customer')
+            TextInput::make('telepon_customer')
                     ->label('Telepon Customer')
                     ->placeholder("Masukan Telepon Customer")
                     ->tel()
@@ -53,19 +55,18 @@ class CustomerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('nama_customer')
+            ->columns([TextColumn::make('nama_customer')
                     ->searchable()
                     ->label('Nama Customer')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('kode_customer')
+            TextColumn::make('kode_customer')
                     ->searchable()
                     ->label('Kode Customer')
                     ->copyable(),
-                Tables\Columns\TextColumn::make('alamat_customer')
+            TextColumn::make('alamat_customer')
                     ->searchable()
                     ->label('Alamat Customer'),
-                Tables\Columns\TextColumn::make('telepon_customer')
+            TextColumn::make('telepon_customer')
                     ->searchable()
                     ->label('Telepon Customer'),
             ])
@@ -94,8 +95,8 @@ class CustomerResource extends Resource
     {
         return [
             'index' => Pages\ListCustomers::route('/'),
-            'create' => Pages\CreateCustomer::route('/create'),
-            'edit' => Pages\EditCustomer::route('/{record}/edit'),
+            // 'create' => Pages\CreateCustomer::route('/create'),
+            // 'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
     }
 }
