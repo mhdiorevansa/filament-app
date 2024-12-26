@@ -41,7 +41,6 @@ class StatsOverview extends BaseWidget
     {
         $lastWeekCount = $model::where('created_at', '>=', now()->subWeek())->count();
         $change = $currentCount - $lastWeekCount;
-
         if ($change > 0) {
             return [
                 'description' => abs($change) . ' increase',
@@ -55,7 +54,6 @@ class StatsOverview extends BaseWidget
                 'color' => 'danger',
             ];
         }
-
         return [
             'description' => 'No change',
             'icon' => 'heroicon-m-minus-circle',
