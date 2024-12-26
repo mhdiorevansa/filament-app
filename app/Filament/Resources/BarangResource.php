@@ -21,9 +21,9 @@ class BarangResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Manage Data';
-    protected static ?string $navigationLabel = 'Items';
-    protected static ?string $slug = 'items';
-    protected static ?string $label = 'Items';
+    protected static ?string $navigationLabel = 'Barang';
+    protected static ?string $slug = 'barang';
+    protected static ?string $label = 'Barang';
 
     public static function form(Form $form): Form
     {
@@ -54,8 +54,11 @@ class BarangResource extends Resource
             ->columns([
                 TextColumn::make('nama_barang')->searchable()->label('Nama Barang')->sortable(),
                 TextColumn::make('kode_barang')->searchable()->label('Kode Barang')->copyable(),
-                TextColumn::make('harga_barang')->searchable()->label('Harga Barang'),
+                TextColumn::make('harga_barang')->searchable()->label('Harga Barang')->formatStateUsing(fn(Barang $record): string => 'Rp ' . number_format($record->harga_barang, 0, '.')),
             ])
+            ->emptyStateHeading('Tidak ada data barang')
+            ->emptyStateDescription('Silahkan tambah barang terlebih dahulu')
+            ->emptyStateIcon('heroicon-o-exclamation-circle')
             ->filters([
                 //
             ])
@@ -81,8 +84,6 @@ class BarangResource extends Resource
     {
         return [
             'index' => Pages\ListBarangs::route('/'),
-            // 'create' => Pages\CreateBarang::route('/create'),
-            // 'edit' => Pages\EditBarang::route('/{record}/edit'),
         ];
     }
 }

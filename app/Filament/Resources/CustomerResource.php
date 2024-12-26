@@ -21,7 +21,8 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
     protected static ?string $navigationGroup = 'Manage Data';
-    protected static ?string $navigationLabel = 'Customers';
+    protected static ?string $navigationLabel = 'Customer';
+    protected static ?string $slug = 'customer';
 
     public static function form(Form $form): Form
     {
@@ -32,17 +33,17 @@ class CustomerResource extends Resource
                     ->placeholder("Masukan Nama Customer")
                     ->required()
                     ->maxLength(100),
-            TextInput::make('kode_customer')
+                TextInput::make('kode_customer')
                     ->label('Kode Customer')
                     ->placeholder("Masukan Kode Customer")
                     ->required()
                     ->maxLength(100),
-            TextInput::make('alamat_customer')
+                TextInput::make('alamat_customer')
                     ->label('Alamat Customer')
                     ->placeholder("Masukan Alamat Customer")
                     ->required()
                     ->maxLength(100),
-            TextInput::make('telepon_customer')
+                TextInput::make('telepon_customer')
                     ->label('Telepon Customer')
                     ->placeholder("Masukan Telepon Customer")
                     ->tel()
@@ -55,21 +56,25 @@ class CustomerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([TextColumn::make('nama_customer')
+            ->columns([
+                TextColumn::make('nama_customer')
                     ->searchable()
                     ->label('Nama Customer')
                     ->sortable(),
-            TextColumn::make('kode_customer')
+                TextColumn::make('kode_customer')
                     ->searchable()
                     ->label('Kode Customer')
                     ->copyable(),
-            TextColumn::make('alamat_customer')
+                TextColumn::make('alamat_customer')
                     ->searchable()
                     ->label('Alamat Customer'),
-            TextColumn::make('telepon_customer')
+                TextColumn::make('telepon_customer')
                     ->searchable()
                     ->label('Telepon Customer'),
             ])
+            ->emptyStateHeading('Tidak ada data customer')
+            ->emptyStateDescription('Silahkan tambah customer terlebih dahulu')
+            ->emptyStateIcon('heroicon-o-exclamation-circle')
             ->filters([
                 //
             ])

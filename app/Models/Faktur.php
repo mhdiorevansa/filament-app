@@ -33,4 +33,14 @@ class Faktur extends Model
     {
         return $this->hasMany(DetailFaktur::class, 'faktur_id', 'id');
     }
+
+    /**
+     * Get all of the penjualan for the Faktur
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function penjualan(): HasMany
+    {
+        return $this->hasMany(Penjualan::class, 'faktur_id', 'id');
+    }
 }
