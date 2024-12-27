@@ -6,10 +6,13 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
+use Filament\Forms\Components\Field;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,16 +35,28 @@ class CustomerResource extends Resource
                     ->label('Nama Customer')
                     ->placeholder("Masukan Nama Customer")
                     ->required()
+                    ->columnSpan([
+                        'default' => 2,
+                        'md' => 1,
+                    ])
                     ->maxLength(100),
                 TextInput::make('kode_customer')
                     ->label('Kode Customer')
                     ->placeholder("Masukan Kode Customer")
                     ->required()
+                    ->columnSpan([
+                        'default' => 2,
+                        'md' => 1,
+                    ])
                     ->maxLength(100),
                 TextInput::make('alamat_customer')
                     ->label('Alamat Customer')
                     ->placeholder("Masukan Alamat Customer")
                     ->required()
+                    ->columnSpan([
+                        'default' => 2,
+                        'md' => 1,
+                    ])
                     ->maxLength(100),
                 TextInput::make('telepon_customer')
                     ->label('Telepon Customer')
@@ -49,7 +64,18 @@ class CustomerResource extends Resource
                     ->tel()
                     ->numeric()
                     ->required()
+                    ->columnSpan([
+                        'default' => 2,
+                        'md' => 1,
+                    ])
                     ->maxLength(100),
+                FileUpload::make('image_customer')
+                    ->label('Foto Customer')
+                    ->image()
+                    ->directory('customer_images')
+                    ->columnSpan([
+                        'default' => 2,
+                    ]),
             ]);
     }
 
@@ -71,6 +97,9 @@ class CustomerResource extends Resource
                 TextColumn::make('telepon_customer')
                     ->searchable()
                     ->label('Telepon Customer'),
+                ImageColumn::make('image_customer')
+                    ->disk('public')
+                    ->label('Foto Customer'),
             ])
             ->emptyStateHeading('Tidak ada data customer')
             ->emptyStateDescription('Silahkan tambah customer terlebih dahulu')
