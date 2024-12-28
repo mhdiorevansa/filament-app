@@ -46,14 +46,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
-    /**
-     * Get all of the attendances for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function attendances(): HasMany
-    {
-        return $this->hasMany(Attendance::class, 'user_id', 'id');
-    }
 }
