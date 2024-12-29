@@ -32,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->sidebarCollapsibleOnDesktop()
+            ->sidebarWidth('17rem')
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
